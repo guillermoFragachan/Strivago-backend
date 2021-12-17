@@ -50,30 +50,6 @@ const checkCredentials = async (email: string, password: string) => {
   }
 }
 
-// usersRouter.post("/login", async (req:any, res:any, next:any) => {
-
-
-//   try {
-//     const { email, password } = req.body
-
-//     const emailT: string = email
-//     const passT: string = password
-
-//     // const user = await UserModel.checkCredentials(email, password)
-//       const user:any = await checkCredentials(email, password)
-
-
-//     if (user) {
-//       const accessToken = await JWTAuthenticate(user);
-
-//       res.send({ accessToken });
-//     } else {
-//       next(createHttpError(401, "Credentials are not ok!"));
-//     }
-//   } catch (error) {
-//     next(error);
-//   }
-// });
 
 
 usersRouter.post("/login", async (req:any, res:any, next:any) => {
@@ -100,31 +76,18 @@ usersRouter.post("/login", async (req:any, res:any, next:any) => {
 
 
 
-usersRouter.get(
-  "/me/accomodation",
-  JWTAuthMiddleware,
-  hostMiddleware,
-  async (req:any, res, next) => {
-    try {
-      console.log(req.user._id.toString());
-      const accomodations = await AccommodationModel.find({
-        host: req.user._id.toString(),
-      });
-
-      res.status(200).send(accomodations);
-    } catch (error) {
-      next(error);
-    }
-  }
-);
-
 usersRouter.get("/me", JWTAuthMiddleware, async (req:any, res, next) => {
   try {
-    console.log(req.user);
-    res.send(req.user);
+    // req.user.name = "John"
+    req.user.name = req.body.name
+    // console.log(req.user)
+    await req.user.save()
+    res.send({ user: req.user })
   } catch (error) {
-    next(error);
+    next(error)
   }
-});
+}
+);
+
 
 export default usersRouter;
