@@ -1,6 +1,8 @@
 import createHttpError from "http-errors";
 import {UserSchema} from "../db/userSchema";
+import { UserModel } from "../db/models";
 import { verifyJWT } from "./tools.js";
+
 
 export const JWTAuthMiddleware = async (req:any, res:any, next:any) => {
   // 1. Check if Authorization header is received, if it is not --> 401
@@ -21,7 +23,7 @@ export const JWTAuthMiddleware = async (req:any, res:any, next:any) => {
       console.log("DECODED TOKEN ", decodedToken);
 
       // 4. Find the user in db and attach him/her to the request object
-      const user =  await UserSchema.findById(decodedToken._id);
+      const user =  await UserModel.findById(decodedToken._id);
 
       if (user) {
         req.user = user;

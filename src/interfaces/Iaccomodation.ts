@@ -5,6 +5,3 @@ export interface IAccommodation {
   city: String;
 }
 
-export interface IUser{
-  
-}
