@@ -1,0 +1,34 @@
+{
+  "name": "rest-api-ci-cd-with-yest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watch": "jest --watchAll",
+    "dev": "ts-node-dev ./src/index",
+    "start": "node ./src/index"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.0.3",
+    "@types/supertest": "^2.0.11",
+    "dotenv": "^10.0.0",
+    "jest": "^27.4.4",
+    "supertest": "^6.1.6",
+    "ts-jest": "^27.1.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express-list-endpoints": "^6.0.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-list-endpoints": "^6.0.0",
+    "mongoose": "^6.1.1"
+  }
+}
