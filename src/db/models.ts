@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { DestinationSchema } from "./destinationSchema";
 import {UserSchema} from './userSchema'
 import IUser from '../interfaces/Iuser'
-import {Model} from "mongoose"
+import {Model, Types } from "mongoose"
 
 const { model } = mongoose;
 
@@ -14,4 +14,4 @@ export const DestinationModel = model("Destination", DestinationSchema);
 interface UserModel extends Model<IUser> {
     checkCredentials(): any;
   }
-export const UserModel = model<IUser, UserModel>("User", UserSchema)
+export const UserModel = model("User", UserSchema)

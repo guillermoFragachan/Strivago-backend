@@ -2,10 +2,19 @@ import mongoose from 'mongoose'
 import bcrypt from "bcrypt"
 import IUser from '../interfaces/Iuser'
 import { Model } from 'mongoose';
+import {Document} from 'mongoose'
 
+interface UserDocument extends Document {
+  _id: number | string | null,
+  name: string | any,
+  surname: string,
+  email: string,
+  password: string,
+  role: string
+}
 
-interface UserModel extends Model<IUser> {
-  checkCredentials(email:any, password:any): any;
+interface UserModel extends Model<UserDocument> {
+  checkCredentials(email:string, password:string):Promise<UserDocument |null>;
 }
 const { Schema, model } = mongoose
 
@@ -37,7 +46,9 @@ UserSchema.methods.toJSON = function () {
   return userObject
 }
 
-UserSchema.statics.checkCredentials = async function (email:string, plainPw:string) {
+// type credentials = (email:string, pass:string) => void
+
+UserSchema.statics.checkCredentials = async function (email:string, plainPw:string):Promise<any> {
   const user = await this.findOne({ email }) 
 
   if (user) {
@@ -52,4 +63,19 @@ UserSchema.statics.checkCredentials = async function (email:string, plainPw:stri
   }
 }
 
+// interface 
 
+// UserSchema.statics('checkCredentials', async function (email:string, password: string) {
+//   const user = await this.findOne({ email }) 
+
+//   if (user) {
+//     const isMatch = await bcrypt.compare(plainPw, user.password)
+//     if (isMatch) {
+//       return user
+//     } else {
+//       return null
+//     }
+//   } else {
+//     return null 
+//   }
+// })
