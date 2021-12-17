@@ -4,3 +4,7 @@ export interface IAccommodation {
   maxGuests: Number;
   city: String;
 }
+
+export interface IUser{
+  
+}
