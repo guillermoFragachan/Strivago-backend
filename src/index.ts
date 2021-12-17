@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import { server } from "./app";
 import listEndpoints from "express-list-endpoints";
 
-const port = process.env.PORT! || 3000;
+const port = process.env.PORT! || 3001;
 
 // Db connection
 mongoose.connect(process.env.MONGODB_URL!).then(() => {
